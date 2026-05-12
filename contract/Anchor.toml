@@ -1,0 +1,22 @@
+[features]
+seeds = false
+skip-lint = false
+
+[programs.localnet]
+vellum_contract = "GtaC3d2ehX8jayPiTzJwP1vbs5PFbCQ4dkS7GoBw7FDN"
+
+[programs.devnet]
+vellum_contract = "GtaC3d2ehX8jayPiTzJwP1vbs5PFbCQ4dkS7GoBw7FDN"
+
+[registry]
+url = "https://api.apr.dev"
+
+[provider]
+cluster = "Devnet"
+wallet = "~/.config/solana/id.json"
+
+[scripts]
+test = "npx tsx ./node_modules/mocha/bin/mocha -t 1000000 tests/**/*.ts"
+
+[test]
+startup_wait = 5000

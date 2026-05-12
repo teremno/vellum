@@ -1,0 +1,744 @@
+{
+  "address": "GtaC3d2ehX8jayPiTzJwP1vbs5PFbCQ4dkS7GoBw7FDN",
+  "metadata": {
+    "name": "vellum_contract",
+    "version": "0.1.0",
+    "spec": "0.1.0",
+    "description": "Vellum — B2B Invoicing + ViDA Tax Automation on Solana"
+  },
+  "instructions": [
+    {
+      "name": "create_invoice",
+      "discriminator": [
+        154,
+        170,
+        31,
+        135,
+        134,
+        100,
+        156,
+        146
+      ],
+      "accounts": [
+        {
+          "name": "invoice",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  105,
+                  110,
+                  118,
+                  111,
+                  105,
+                  99,
+                  101
+                ]
+              },
+              {
+                "kind": "arg",
+                "path": "invoice_id"
+              }
+            ]
+          }
+        },
+        {
+          "name": "payer_account"
+        },
+        {
+          "name": "issuer",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "invoice_id",
+          "type": "string"
+        },
+        {
+          "name": "payer",
+          "type": "pubkey"
+        },
+        {
+          "name": "amount",
+          "type": "u64"
+        },
+        {
+          "name": "currency",
+          "type": "string"
+        },
+        {
+          "name": "tax_amount",
+          "type": "u64"
+        },
+        {
+          "name": "tax_rate",
+          "type": "u16"
+        },
+        {
+          "name": "due_date",
+          "type": "i64"
+        },
+        {
+          "name": "ipfs_hash",
+          "type": "string"
+        },
+        {
+          "name": "vat_id_issuer",
+          "type": "string"
+        },
+        {
+          "name": "vat_id_payer",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "name": "dispute_invoice",
+      "discriminator": [
+        10,
+        4,
+        236,
+        98,
+        232,
+        38,
+        60,
+        76
+      ],
+      "accounts": [
+        {
+          "name": "invoice",
+          "writable": true
+        },
+        {
+          "name": "disputer",
+          "signer": true
+        }
+      ],
+      "args": [
+        {
+          "name": "_reason",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "name": "mark_overdue",
+      "discriminator": [
+        178,
+        135,
+        117,
+        229,
+        133,
+        152,
+        175,
+        27
+      ],
+      "accounts": [
+        {
+          "name": "invoice",
+          "writable": true
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "pay_invoice",
+      "discriminator": [
+        104,
+        6,
+        62,
+        239,
+        197,
+        206,
+        208,
+        220
+      ],
+      "accounts": [
+        {
+          "name": "invoice",
+          "writable": true
+        },
+        {
+          "name": "payer",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "payer_token_account",
+          "writable": true
+        },
+        {
+          "name": "issuer_token_account",
+          "writable": true
+        },
+        {
+          "name": "token_program",
+          "address": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "record_tax_payment",
+      "discriminator": [
+        198,
+        11,
+        196,
+        159,
+        66,
+        152,
+        141,
+        255
+      ],
+      "accounts": [
+        {
+          "name": "invoice"
+        },
+        {
+          "name": "tax_payment_record",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  116,
+                  97,
+                  120,
+                  95,
+                  112,
+                  97,
+                  121,
+                  109,
+                  101,
+                  110,
+                  116
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "invoice"
+              }
+            ]
+          }
+        },
+        {
+          "name": "recorder",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "currency",
+          "type": "string"
+        },
+        {
+          "name": "reference",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "name": "register_company",
+      "discriminator": [
+        109,
+        51,
+        247,
+        199,
+        229,
+        252,
+        157,
+        222
+      ],
+      "accounts": [
+        {
+          "name": "company",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  99,
+                  111,
+                  109,
+                  112,
+                  97,
+                  110,
+                  121
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "authority"
+              }
+            ]
+          }
+        },
+        {
+          "name": "authority",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "name",
+          "type": "string"
+        },
+        {
+          "name": "vat_id",
+          "type": "string"
+        },
+        {
+          "name": "country",
+          "type": "string"
+        },
+        {
+          "name": "wallet_address",
+          "type": "pubkey"
+        }
+      ]
+    }
+  ],
+  "accounts": [
+    {
+      "name": "Company",
+      "discriminator": [
+        32,
+        212,
+        52,
+        137,
+        90,
+        7,
+        206,
+        183
+      ]
+    },
+    {
+      "name": "Invoice",
+      "discriminator": [
+        51,
+        194,
+        250,
+        114,
+        6,
+        104,
+        18,
+        164
+      ]
+    },
+    {
+      "name": "TaxPaymentRecord",
+      "discriminator": [
+        16,
+        186,
+        75,
+        243,
+        125,
+        181,
+        92,
+        133
+      ]
+    }
+  ],
+  "events": [
+    {
+      "name": "InvoiceCreated",
+      "discriminator": [
+        189,
+        114,
+        235,
+        219,
+        193,
+        125,
+        47,
+        54
+      ]
+    },
+    {
+      "name": "InvoicePaid",
+      "discriminator": [
+        200,
+        211,
+        168,
+        170,
+        46,
+        82,
+        83,
+        186
+      ]
+    },
+    {
+      "name": "TaxPaymentRecorded",
+      "discriminator": [
+        88,
+        114,
+        249,
+        34,
+        114,
+        11,
+        108,
+        56
+      ]
+    }
+  ],
+  "errors": [
+    {
+      "code": 6000,
+      "name": "InvalidAmount",
+      "msg": "Invoice amount must be greater than zero"
+    },
+    {
+      "code": 6001,
+      "name": "DueDateInPast",
+      "msg": "Due date must be in the future"
+    },
+    {
+      "code": 6002,
+      "name": "UnauthorizedPayer",
+      "msg": "Only the designated payer can pay this invoice"
+    },
+    {
+      "code": 6003,
+      "name": "UnauthorizedDisputer",
+      "msg": "Only the payer can dispute this invoice"
+    },
+    {
+      "code": 6004,
+      "name": "InvoiceNotPayable",
+      "msg": "Invoice is not in a payable state"
+    },
+    {
+      "code": 6005,
+      "name": "InvoiceNotDisputable",
+      "msg": "Invoice is not in a disputable state"
+    },
+    {
+      "code": 6006,
+      "name": "InvoiceNotOverdue",
+      "msg": "Invoice is not overdue yet"
+    },
+    {
+      "code": 6007,
+      "name": "StringTooLong",
+      "msg": "String exceeds maximum length"
+    },
+    {
+      "code": 6008,
+      "name": "MissingVatId",
+      "msg": "VAT ID is required"
+    },
+    {
+      "code": 6009,
+      "name": "MissingCurrency",
+      "msg": "Currency must be specified"
+    },
+    {
+      "code": 6010,
+      "name": "CompanyAlreadyRegistered",
+      "msg": "Company already registered for this authority"
+    },
+    {
+      "code": 6011,
+      "name": "UnauthorizedTaxRecorder",
+      "msg": "Only the invoice issuer can record tax"
+    },
+    {
+      "code": 6012,
+      "name": "TaxAlreadyRecorded",
+      "msg": "Tax has already been recorded for this invoice"
+    },
+    {
+      "code": 6013,
+      "name": "MissingIpfsHash",
+      "msg": "IPFS hash is required"
+    }
+  ],
+  "types": [
+    {
+      "name": "Company",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "authority",
+            "type": "pubkey"
+          },
+          {
+            "name": "name",
+            "type": "string"
+          },
+          {
+            "name": "vat_id",
+            "type": "string"
+          },
+          {
+            "name": "country",
+            "type": "string"
+          },
+          {
+            "name": "wallet_address",
+            "type": "pubkey"
+          },
+          {
+            "name": "bump",
+            "type": "u8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Invoice",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "invoice_id",
+            "type": "string"
+          },
+          {
+            "name": "issuer",
+            "type": "pubkey"
+          },
+          {
+            "name": "payer",
+            "type": "pubkey"
+          },
+          {
+            "name": "amount",
+            "type": "u64"
+          },
+          {
+            "name": "currency",
+            "type": "string"
+          },
+          {
+            "name": "tax_amount",
+            "type": "u64"
+          },
+          {
+            "name": "tax_rate",
+            "type": "u16"
+          },
+          {
+            "name": "status",
+            "type": {
+              "defined": {
+                "name": "InvoiceStatus"
+              }
+            }
+          },
+          {
+            "name": "created_at",
+            "type": "i64"
+          },
+          {
+            "name": "due_date",
+            "type": "i64"
+          },
+          {
+            "name": "ipfs_hash",
+            "type": "string"
+          },
+          {
+            "name": "vat_id_issuer",
+            "type": "string"
+          },
+          {
+            "name": "vat_id_payer",
+            "type": "string"
+          },
+          {
+            "name": "bump",
+            "type": "u8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "InvoiceCreated",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "invoice_id",
+            "type": "string"
+          },
+          {
+            "name": "issuer",
+            "type": "pubkey"
+          },
+          {
+            "name": "payer",
+            "type": "pubkey"
+          },
+          {
+            "name": "amount",
+            "type": "u64"
+          },
+          {
+            "name": "currency",
+            "type": "string"
+          },
+          {
+            "name": "tax_amount",
+            "type": "u64"
+          },
+          {
+            "name": "tax_rate",
+            "type": "u16"
+          },
+          {
+            "name": "due_date",
+            "type": "i64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "InvoicePaid",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "invoice_id",
+            "type": "string"
+          },
+          {
+            "name": "issuer",
+            "type": "pubkey"
+          },
+          {
+            "name": "payer",
+            "type": "pubkey"
+          },
+          {
+            "name": "amount",
+            "type": "u64"
+          },
+          {
+            "name": "tax_amount",
+            "type": "u64"
+          },
+          {
+            "name": "paid_at",
+            "type": "i64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "InvoiceStatus",
+      "type": {
+        "kind": "enum",
+        "variants": [
+          {
+            "name": "Draft"
+          },
+          {
+            "name": "Pending"
+          },
+          {
+            "name": "Paid"
+          },
+          {
+            "name": "Overdue"
+          },
+          {
+            "name": "Disputed"
+          }
+        ]
+      }
+    },
+    {
+      "name": "TaxPaymentRecord",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "invoice",
+            "type": "pubkey"
+          },
+          {
+            "name": "recorder",
+            "type": "pubkey"
+          },
+          {
+            "name": "tax_amount",
+            "type": "u64"
+          },
+          {
+            "name": "tax_rate",
+            "type": "u16"
+          },
+          {
+            "name": "currency",
+            "type": "string"
+          },
+          {
+            "name": "reference",
+            "type": "string"
+          },
+          {
+            "name": "paid_at",
+            "type": "i64"
+          },
+          {
+            "name": "bump",
+            "type": "u8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "TaxPaymentRecorded",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "invoice",
+            "type": "pubkey"
+          },
+          {
+            "name": "tax_amount",
+            "type": "u64"
+          },
+          {
+            "name": "tax_rate",
+            "type": "u16"
+          },
+          {
+            "name": "reference",
+            "type": "string"
+          },
+          {
+            "name": "paid_at",
+            "type": "i64"
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,101 @@
+@import "tailwindcss";
+
+:root {
+  --background: #020617;
+  --foreground: #ffffff;
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: var(--font-inter), system-ui, sans-serif;
+}
+
+/* Solana wallet adapter overrides for dark theme */
+.wallet-adapter-modal-wrapper {
+  background-color: rgba(0, 0, 0, 0.7) !important;
+}
+
+.wallet-adapter-modal-container {
+  background-color: #1e293b !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  border-radius: 16px !important;
+}
+
+.wallet-adapter-modal-title {
+  color: #ffffff !important;
+}
+
+.wallet-adapter-modal-button-close {
+  background-color: transparent !important;
+}
+
+.wallet-adapter-button {
+  background: linear-gradient(135deg, #7c3aed, #2563eb) !important;
+  border-radius: 12px !important;
+  font-weight: 600 !important;
+  transition: all 0.2s !important;
+}
+
+.wallet-adapter-button:hover {
+  background: linear-gradient(135deg, #8b5cf6, #3b82f6) !important;
+  transform: translateY(-1px) !important;
+}
+
+.wallet-adapter-button-trigger {
+  background: linear-gradient(135deg, #7c3aed, #2563eb) !important;
+  border-radius: 12px !important;
+  padding: 8px 20px !important;
+  font-weight: 600 !important;
+  height: auto !important;
+}
+
+.wallet-adapter-dropdown-list {
+  background-color: #1e293b !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  border-radius: 12px !important;
+}
+
+.wallet-adapter-dropdown-list-item {
+  color: #e2e8f0 !important;
+}
+
+.wallet-adapter-dropdown-list-item:hover {
+  background-color: rgba(139, 92, 246, 0.1) !important;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0f172a;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #334155;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #475569;
+}
+
+/* Select dropdown styling for dark mode */
+select option {
+  background-color: #1e293b;
+  color: #ffffff;
+}
+
+/* Smooth transitions */
+* {
+  transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, transform;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
+/* Remove transition from inputs to prevent lag */
+input, select, textarea {
+  transition-duration: 0ms;
+}

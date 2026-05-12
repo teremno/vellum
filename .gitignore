@@ -1,0 +1,40 @@
+# dependencies
+node_modules/
+**/node_modules/
+
+# build outputs
+.next/
+out/
+build/
+dist/
+target/
+**/target/
+
+# generated local state
+.anchor/
+.turbo/
+coverage/
+*.tsbuildinfo
+next-env.d.ts
+
+# logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+
+# local env and secrets
+.env
+.env.*
+*.pem
+*keypair*.json
+id.json
+
+# OS/editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+
+# local backups created while converting nested repos
+.local-backups/
