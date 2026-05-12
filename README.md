@@ -101,6 +101,19 @@ If port `3000` is already in use:
 node node_modules/next/dist/bin/next dev --turbo -p 3001
 ```
 
+### Vercel deployment
+
+This repository is a monorepo with the Next.js app in `frontend/`. The root `vercel.json` points Vercel to the correct app directory.
+
+Recommended Vercel settings:
+
+- Framework Preset: `Next.js`
+- Install Command: `cd frontend && npm ci`
+- Build Command: `cd frontend && npm run build`
+- Output Directory: `frontend/.next`
+
+If configuring the project manually in Vercel, an alternative is to set Root Directory to `frontend` and let Vercel use the default Next.js settings.
+
 ### Contract
 
 The contract workflow is easiest from WSL/Linux with Solana and Anchor installed.
