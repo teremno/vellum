@@ -15,6 +15,30 @@ This is not a certified tax product. It is a working technical prototype that de
 - `frontend/` - Next.js 16 app with Solana wallet connection, invoice creation, live invoice/company reads, dashboard, and VAT calculator.
 - `contract/` - Anchor smart contract for invoices, company registration, invoice payment/dispute/overdue state, and tax payment records.
 
+```mermaid
+flowchart LR
+  User[Business user] --> UI[Next.js frontend]
+  UI --> Wallet[Phantom wallet]
+  UI --> Anchor[Anchor client]
+  Anchor --> Program[Vellum Solana program]
+  Program --> Invoice[Invoice accounts]
+  Program --> Company[Company accounts]
+  Program --> Tax[Tax payment records]
+  UI --> Explorer[Solana Explorer]
+```
+
+The frontend talks directly to the deployed Anchor program on Solana devnet. Invoice and company state is stored in program accounts, while submitted transactions are visible in Solana Explorer for auditability.
+
+## Business case
+
+Vellum targets B2B invoice workflows where companies need shared payment state, VAT metadata, and verifiable audit trails. The initial wedge is crypto-native and cross-border SMEs that already use stablecoins or need programmable payment records across jurisdictions.
+
+The long-term opportunity is to connect invoice creation, stablecoin settlement, dispute state, and VAT/ViDA-style reporting in one transparent workflow instead of splitting it across private ERP records, bank transfers, and manual tax evidence.
+
+## Why Solana
+
+Solana gives Vellum low transaction cost, fast confirmation, public auditability, and composability with stablecoin payment rails. That makes invoice lifecycle events cheap enough to record on-chain and practical enough for business workflows that may generate many invoices.
+
 ## Smart contract
 
 Program ID:
@@ -50,11 +74,14 @@ Core instructions:
 
 ## Demo evidence
 
-Devnet invoice creation transaction:
+Devnet invoice creation transactions:
 
-https://explorer.solana.com/tx/3CbPNH2pD9y6hKYRLTrwY4Eb5cKsLaTvGSaeRtKsw9UadKFx49JB6pDDzvnyVbPyuWMofQ6w1PbFABKYZJ4ipD2?cluster=devnet
+- https://explorer.solana.com/tx/3CbPNH2pD9y6hKYRLTrwY4Eb5cKsLaTvGSaeRtKsw9UadKFx49JB6pDDzvnyVbPyuWMofQ6w1PbFABKYZJ4ipD2?cluster=devnet
+- https://explorer.solana.com/tx/4At48ART7VR3cJL3odfGmtCaUWNntKW7VLAv3ALZniFSgHyD4duxf1aDm6ejM81bWZk4RKkS3sY8fn5dshaAxxj4?cluster=devnet
 
 ![Invoice creation success](docs/screenshots/create-invoice-success.png)
+
+![Second invoice creation success](docs/screenshots/create-invoice-success-2.png)
 
 ## Run locally
 
@@ -111,6 +138,14 @@ Current local contract test result: `16 passing`.
 - Devnet faucet limits can block devnet test runs; localnet tests are more reliable.
 - VAT/ViDA logic is a prototype and not legal advice.
 - The frontend stores invoice values in accounting minor units for on-chain integer compatibility.
+
+## Roadmap
+
+- Token-account selection and demo-friendly USDC settlement.
+- PDF/IPFS invoice upload flow.
+- Exportable VAT/ViDA reporting view.
+- Role-based company teams and accountant access.
+- ERP import/export integrations for invoice data.
 
 ## Hackathon demo flow
 
