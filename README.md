@@ -48,6 +48,14 @@ Core instructions:
 - EU VAT calculator with standard VAT rates.
 - Solana Explorer links for submitted transactions.
 
+## Demo evidence
+
+Devnet invoice creation transaction:
+
+https://explorer.solana.com/tx/3CbPNH2pD9y6hKYRLTrwY4Eb5cKsLaTvGSaeRtKsw9UadKFx49JB6pDDzvnyVbPyuWMofQ6w1PbFABKYZJ4ipD2?cluster=devnet
+
+![Invoice creation success](docs/screenshots/create-invoice-success.png)
+
 ## Run locally
 
 ### Frontend
