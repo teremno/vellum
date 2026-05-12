@@ -103,16 +103,17 @@ node node_modules/next/dist/bin/next dev --turbo -p 3001
 
 ### Vercel deployment
 
-This repository is a monorepo with the Next.js app in `frontend/`. The root `vercel.json` points Vercel to the correct app directory.
+This repository is a monorepo with the Next.js app in `frontend/`. In Vercel, set the project Root Directory to `frontend`.
 
 Recommended Vercel settings:
 
+- Root Directory: `frontend`
 - Framework Preset: `Next.js`
-- Install Command: `cd frontend && npm ci`
-- Build Command: `cd frontend && npm run build`
-- Output Directory: `frontend/.next`
+- Install Command: `npm ci`
+- Build Command: `npm run build`
+- Output Directory: leave empty, or use `.next`
 
-If configuring the project manually in Vercel, an alternative is to set Root Directory to `frontend` and let Vercel use the default Next.js settings.
+After changing Root Directory, redeploy the latest commit. Deploying from the repository root will not work because the root contains the Anchor contract and docs, not the Next.js app.
 
 ### Contract
 
